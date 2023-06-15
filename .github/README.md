@@ -14,13 +14,14 @@
 <p align="center"> <b>A Pinterest Downloader Telegram Bot written in Python with the help of Pyrogram.</b> </p>
 
 <p align="center">
+<a href="//github.com/mccnlight"><img src="https://img.shields.io/badge/Author-Bikash-red.svg?style=for-the-badge&logo=github?logoWidth=10"/><a/>
+</p>
+<p align="center">
 <a href="https://github.com/Bikash1225/Pinterest-dl/stargazers"><img src="https://img.shields.io/github/stars/Bikash1225/Pinterest-dl?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
 <a href="https://github.com/Bikash1225/Pinterest-dl/network/members"> <img src="https://img.shields.io/github/forks/Bikash1225/Pinterest-dl?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
-<a href="https://github.com/Bikash1225/Pinterest-dl/blob/master/LICENSE"> <img src="https://img.shields.io/badge/License-MIT-blueviolet?style=for-the-badge" alt="License" /> </a>
-<a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Written%20in-Python-skyblue?style=for-the-badge&logo=python" alt="Python" /> </a>
-<a href="https://github.com/Bikash1225/Pinterest-dl/commits/Bikash1225"> <img src="https://img.shields.io/github/last-commit/Bikash1225/Pinterest-dl?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
-    
-</p>
+<a href="https://github.com/Bikash1225/Pinterest-dl/commits/Bikash1225"> <img src="https://img.shields.io/github/last-commit/Bikash1225/Pinterest-dl?color=black&logo=github&logoColor=black&style=for-the-badge" /></a></p>
+<p align="center">
+<a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Written%20in-Python-skyblue?style=for-the-badge&logo=python" alt="Python" /> </a> </p>
 
 <p><b>» Available on Telegram as <a href="https://t.me/ProPinterestBot">Pinterest Downloader Pro</a></b></p>
 
