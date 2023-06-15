@@ -1,0 +1,11 @@
+beautifulsoup4
+certifi
+charset-normalizer
+idna
+pyaes
+Pyrogram
+PySocks
+requests
+soupsieve
+TgCrypto
+urllib3
