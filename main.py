@@ -1,14 +1,13 @@
 from pyrogram import Client
 
-api_id = 
-api_hash = ""
-bot_token = ""
+import config
+
 
 app = Client(
-    "bot",
-    api_id=api_id,
-    api_hash=api_hash,
-    bot_token=bot_token,
+    "Pinterest-DL",
+    api_id=config.API_ID,
+    api_hash=config.API_HASH,
+    bot_token=config.BOT_TOKEN,
     in_memory=True,
     plugins={"root": "ToXic"},
 )
