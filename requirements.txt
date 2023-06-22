@@ -2,9 +2,11 @@ beautifulsoup4
 certifi
 charset-normalizer
 idna
+motor
 pyaes
 Pyrogram
 PySocks
+python-dotenv
 requests
 soupsieve
 TgCrypto
