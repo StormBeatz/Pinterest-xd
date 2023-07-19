@@ -10,6 +10,8 @@ error_msg = """
 ๏ ᴍᴀᴋᴇ sᴜʀᴇ ʏᴏᴜ sᴇɴᴅ ᴍᴇ ᴀ ᴠᴀʟɪᴅ Pɪɴᴛᴇʀᴇsᴛ ᴜʀʟ.
 
 ❅ ɴᴏᴛᴇ: ɪғ ɪᴛ's ᴀ ᴠᴀʟɪᴅ Pɪɴᴛᴇʀᴇsᴛ ʟɪɴᴋ, ᴛʜᴇɴ ʀᴇsᴇɴᴅ ɪᴛ ᴀɢᴀɪɴ.
+
+๏ **Note: i can't download pin groups like** https://www.pinterest.com/pin/813392382698556185/
 """
 
 start_msg = f"""
