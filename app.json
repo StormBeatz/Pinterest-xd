@@ -1,0 +1,29 @@
+{
+  "name": "Pinterest-dl",
+  "description": "A Pinterest Downloader Telegram Bot",
+  "repository": "https://github.com/Bikash1225/Pinterest-dl",
+  "keywords": ["Pinterest", "Downloader", "Telegram", "Bot"],
+  "env": {
+    "API_ID": {
+      "description": "Your API ID",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Your API hash",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Your bot token",
+      "required": true
+    },
+    "MONGO_DB_URI": {
+      "description": "Your MongoDB URI",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "Your owner ID",
+      "required": true
+    }
+  },
+  "stack": "heroku-20"
+}
