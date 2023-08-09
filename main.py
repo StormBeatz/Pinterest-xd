@@ -2,7 +2,6 @@ from pyrogram import Client
 
 import config
 
-
 app = Client(
     "Pinterest-DL",
     api_id=config.API_ID,
