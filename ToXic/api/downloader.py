@@ -1,48 +1,50 @@
+import yt_dlp
 from pyrogram import Client, filters
-from pyrogram.enums import ChatType
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+import os
 
-from config import OWNER_ID
-from ToXic.pin import download
-from ToXic.db import add_served_user
-from ToXic.texts import caption, error_msg, waiting_text
-
-
-@Client.on_message(
-    filters.regex(r"(pinterest\.com/pin/[^/]+|pin\.it/[^/]+)(/$|$)")
-)
-async def pin_dl(client, msg: Message) -> Message:
-    url = f"https://{msg.matches[0].group(1)}"
-    msg_tmp: Message = await msg.reply(waiting_text, quote=True)
-
-    if msg.chat.type == ChatType.PRIVATE:
-        await add_served_user(msg.from_user.id)
-    dl = download(url)
-    if dl:
-        send_type, url = dl
-        await msg_tmp.edit("ᴜᴘʟᴏᴀᴅɪɴɢ...")
-        buttons = InlineKeyboardMarkup(
-            [
-                 [
-                    InlineKeyboardButton(text="❄ ᴄʜᴀɴɴᴇʟ ❄", url="https://NOOBSHEAVEN.t.me"),
-                    InlineKeyboardButton(text="✨ sᴜᴩᴩᴏʀᴛ ✨", url="https://ChatHuB_x_D.t.me"),
-                ],
-                [
-                    InlineKeyboardButton("🥀ᴅᴇᴠᴇʟᴏᴘᴇʀ🥀", user_id=OWNER_ID)
-                ]
-            ]
-        )
-
-        if send_type == "gif":
-            await msg.reply_animation(url, caption=caption, reply_to_message_id=msg.id, reply_markup=buttons)
-        
-        elif send_type == "video":
-            await msg.reply_video(url, caption=caption, reply_to_message_id=msg.id, reply_markup=buttons)
-        
-        elif send_type == "image":
-            await msg.reply_photo(url, caption=caption, reply_to_message_id=msg.id, reply_markup=buttons)
-        
-        return await msg_tmp.delete()
-            
+@Client.on_message(filters.regex(r"(pinterest\.com/pin/[^/]+|pin\.it/[^/]+)(/$|$)"))
+async def handle_pinterest_link(_, message: Message):
+    await message.reply("🔍")
+    pinterest_post_url = re.search(r"(https?://[^\s]+)", message.text)
+    if pinterest_post_url:
+        pinterest_post_url = pinterest_post_url.group(0)
+        await download_pin_or_yt_media(message, Client, pinterest_post_url)
     else:
-        return await msg.reply_text(error_msg)
+        await message.reply_text("Failed to extract Pinterest URL.")
+
+async def download_pin_or_yt_media(message, bot, link, quality=720):
+    chat_id = message.chat.id
+    try:
+        ydl_opts = {
+            "format": f"bestvideo[height<={quality}]+bestaudio/best[height<={quality}]",
+            "outtmpl": "downloads/%(id)s.%(ext)s",
+            "merge_output_format": "mp4",
+            "multithreaded": True,
+            "no-playlist": True,
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            try:
+                info = ydl.extract_info(link, download=True)
+                file_path = ydl.prepare_filename(info)
+                await Client.send_video(chat_id, video=file_path,caption=f" • Video uploaded by {BOT_MENTION} •  ")
+                os.remove(file_path)
+                return
+            except yt_dlp.DownloadError as e:
+                print(f"Error downloading YouTube content: {e}")
+                pass
+        response = requests.get(link)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, 'html.parser')
+        image_url = soup.find('meta', attrs={'property': 'og:image'})['content']
+        response = requests.get(image_url)
+        response.raise_for_status()
+        with open("temp_image.jpg", "wb") as f:
+            f.write(response.content)
+        with open("temp_image.jpg", "rb") as photo_file:
+            await Client.send_photo(chat_id, photo=photo_file,caption=f"• Post uploaded by {BOT_MENTION} •")
+        os.remove("temp_image.jpg")
+        print("Removed temporary photo file.")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        await message.reply_text("Failed to download media.")
