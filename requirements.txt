@@ -5,6 +5,7 @@ idna
 motor
 pyaes
 Pyrogram
+yt-dlp
 PySocks
 python-dotenv
 requests
