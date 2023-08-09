@@ -2,6 +2,8 @@ import yt_dlp
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 import os
+from io import BytesIO
+from bs4 import BeautifulSoup
 
 @Client.on_message(filters.regex(r"(pinterest\.com/pin/[^/]+|pin\.it/[^/]+)(/$|$)"))
 async def handle_pinterest_link(_, message: Message):
@@ -27,7 +29,7 @@ async def download_pin_or_yt_media(message, bot, link, quality=720):
             try:
                 info = ydl.extract_info(link, download=True)
                 file_path = ydl.prepare_filename(info)
-                await Client.send_video(chat_id, video=file_path,caption=f" • Video uploaded by {BOT_MENTION} •  ")
+                await Client.send_video(chat_id, video=file_path,caption=f" • Video uploaded by ")
                 os.remove(file_path)
                 return
             except yt_dlp.DownloadError as e:
@@ -42,7 +44,7 @@ async def download_pin_or_yt_media(message, bot, link, quality=720):
         with open("temp_image.jpg", "wb") as f:
             f.write(response.content)
         with open("temp_image.jpg", "rb") as photo_file:
-            await Client.send_photo(chat_id, photo=photo_file,caption=f"• Post uploaded by {BOT_MENTION} •")
+            await Client.send_photo(chat_id, photo=photo_file,caption=f"• Uploaded by huehue •")
         os.remove("temp_image.jpg")
         print("Removed temporary photo file.")
     except Exception as e:
